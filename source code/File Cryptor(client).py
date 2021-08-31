@@ -19,7 +19,6 @@ class Cryptor:
     # Create instance
     win = tk.Tk()
     win.resizable(False, False)
-    win.resizable(False, False)
     # Add a title
     win.title("File Cryptor - By Jericho")
     win.geometry("540x300")
