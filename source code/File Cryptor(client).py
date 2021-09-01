@@ -186,7 +186,7 @@ class Cryptor:
         webbrowser.open_new(event.widget.cget("text"))
 
     def close(self):
-        self.win.destroy()
+        self.win.quit()
     # ===============#
     #    Widgets    #
     # ===============#
