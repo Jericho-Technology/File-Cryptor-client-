@@ -311,7 +311,6 @@ class Cryptor:
         #     Hotkeys     #
         #=================#
 
-        # Ctrl + O for opening a file
         keyboard.add_hotkey('ctrl + o', self.file_selection)
         keyboard.add_hotkey('ctrl + shift + o', self.directory_selection)
         keyboard.add_hotkey('ctrl + k', self.key_selection)
