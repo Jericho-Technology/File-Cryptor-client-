@@ -61,7 +61,6 @@ class Cryptor:
     # Encrypt file
     def encrypt_file(self):
         global file_types, s
-        self.progress_bar1['value'] = 0
         files_array = []
         count = 0
         max_files = 0
@@ -71,12 +70,14 @@ class Cryptor:
                 answer = askyesno(title='Confirm folder/directory encryption', message='Are you sure that you want to encrypt all files within specified folder/directory?')
                 try:
                     if answer == True:
+                        self.progress_bar1['value'] = 0
+                        self.label3.configure(text="")
                         # Open each file in folder/directory
                         os.chdir(str(self.file_folder_entry.get()))
                         # Counting max files in directory
                         for item in file_types:
-                            max_files += 1
                             files_array.extend(glob.glob(item))
+                        max_files = len(files_array)
                         selected_path = str(self.file_folder_entry.get()).replace("/", r'\\')
                         for file in files_array:
                             file_path = ("".join([selected_path, r'\\', files_array[count]]))
@@ -89,12 +90,11 @@ class Cryptor:
                                 with open(file_path, "wb") as open_file:
                                     open_file.write(encrypted_data)
                                     open_file.close()
-                            self.progress_bar1['value'] = (count / max_files) * 100
                             label = str("".join([self.file_folder_entry.get(), '/', files_array[count]]))
                             self.label3.configure(text='Encrypting: %s' %label)
                             count += 1
+                            self.progress_bar1['value'] = (count / max_files) * 100
                         self.label3.configure(text="Encryption completed.")
-
                 except:
                     tk.messagebox.showerror(title='Error', message='An error has occurred while trying to encrypt files in directory.')
             elif os.path.isfile(self.file_folder_entry.get()):
@@ -122,7 +122,6 @@ class Cryptor:
 
     def decrypt_file(self):
         global file_types
-        self.progress_bar1['value'] = 0
         count = 0
         max_files = 0
         files_array = []
@@ -132,11 +131,13 @@ class Cryptor:
                 answer = askyesno(title='Confirm folder/directory encryption', message='Are you sure that you want to decrypt all files within specified folder/directory?')
                 try:
                     if answer == True:
+                        self.progress_bar1['value'] = 0
+                        self.label3.configure(text="")
                         # Open each file in folder/directory
                         os.chdir(str(self.file_folder_entry.get()))
                         for item in file_types:
-                            max_files += 1
                             files_array.extend(glob.glob(item))
+                        max_files = len(files_array)
                         selected_path = str(self.file_folder_entry.get()).replace("/", r'\\')
                         for file in files_array:
                             file_path = ("".join([selected_path, r'\\', files_array[count]]))
@@ -149,10 +150,10 @@ class Cryptor:
                                 with open(file_path, "wb") as open_file:
                                     open_file.write(decrypted_data)
                                     open_file.close()
-                            self.progress_bar1['value'] = (count / max_files) * 100
                             label = str("".join([self.file_folder_entry.get(), '/', files_array[count]]))
                             self.label3.configure(text='Decrypting: %s' % label)
                             count += 1
+                            self.progress_bar1['value'] = (count / max_files) * 100
                         self.label3.configure(text="Decryption completed.")
                 except:
                     tk.messagebox.showerror(title='Error', message='An error has occurred while trying to decrypt files.')
@@ -218,6 +219,7 @@ class Cryptor:
         canvas3 = ttk.Labelframe(self.tab3, text=' File Cryptor - About ')
         canvas3.grid(column=0, row=0, padx=0, pady=0)
         canvas3.pack(fill='both', expand='yes')
+
         # ============#
         #   Labels   #
         # ============#
