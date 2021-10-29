@@ -2,6 +2,7 @@ Disclaimer:
 The author is not responsible for any damages that this application may bring about. It is up to the user to read and understand the source code and the application functions before using it, this includes but not limited to spotting for any malicious instruction before converting it to an executable file for execution.
 
 # File-Cryptor-client-
+This is the same as the other File Cryptor but without the key generation function.
 
 Requirement:
 1. img folder in the same directory as the executable file.
